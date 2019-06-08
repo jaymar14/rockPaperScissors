@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>rps game</title>
+	<link rel="stylesheet" type="text/css" href="rps.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+ <div class="jumbotron">
+  <h1 class="display-4">Hello, welcome!</h1>
+  <p class="lead">Please Press R, P, or S to begin game!!</p>
+  <img class="rps-pic" src="https://www.esquireme.com/sites/default/files/styles/full_img/public/images/2017/05/29/rock_paper_scissors__2x.png?itok=EB8fRWP9">
+</div>
+
+	<div id="game">
+	</div>
+
+	<script type="text/javascript">
+		
+		var compChoice = ["r", "p", "s"];
+		var wins = 0;
+		var losses = 0;
+		var ties = 0;
+
+		document.onkeyup = function(e) {
+			var userGuess = e.key;
+
+			var compGuess = compChoice[Math.floor(Math.random() * compChoice.length)];
+
+			if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+				if ((userGuess === "r") && (compGuess === "p")){
+					losses++;
+				} else if ((userGuess === "r") && (compGuess === "s")){
+					wins++;
+				} else if ((userGuess === "p") && (compGuess === "r")){
+					wins++;
+				} else if ((userGuess === "p") && (compGuess === "s")){
+					losses++;
+				} else if ((userGuess === "s") && (compGuess === "r")){
+					losses++;
+				} else if ((userGuess === "s") && (compGuess === "p")) {
+					wins++;
+				} else if (userGuess === compGuess) {
+					ties++;
+				}
+
+				var html = 
+				"<p>You chose: " + userGuess + "</p>" +
+				"<p>Comp chose: " + compGuess + "</p>" +
+				"<p>Wins: " + wins + "</p>" +
+				"<p>losses: " + losses + "</p>" +
+				"<p>Ties: " + ties + "</p>";
+
+				document.querySelector("#game").innerHTML = html;
+			}
+
+			if(wins === 5){
+				alert("Nice, you won 5 times!!");
+			} 
+			
+
+		};
+
+	</script>
+
+</body>
+</html>
